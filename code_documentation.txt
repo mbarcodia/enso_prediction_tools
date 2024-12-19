@@ -1,0 +1,74 @@
+ENVIRONMENT 
+conda create --name env-enso-preprocessing python=3.12.0
+conda activate env-enso-preprocessing
+conda install numpy scipy pandas matplotlib xarray scikit-learn netCDF4 cartopy pytorch
+conda install  palettable flake8  jupyterlab black jupyterlab_code_formatter
+pip install ipykernel seaborn cartopy fsspec requests aiohttp h5netcdf wget
+
+SST mean data downloaded from NOAA NCEI Extended Reconstructed Sea Surface Temperature
+https://psl.noaa.gov/data/gridded/data.noaa.ersst.v5.html
+
+Nino34 Index calculation computed generally following below website, but included detrending data
+https://foundations.projectpythia.org/core/xarray/enso-xarray.html
+
+SST data downloaded from NOAA NCEI Extended Reconstructed Sea Surface Temperature
+d277009 | DOI: 10.5065/JZ08-3W17
+
+downloaded files as single monthly files
+to change dimension to unlimited and concatenate, use the following bash script from the command line:
+for file in *.nc; do                          
+    ncks --mk_rec_dmn time "$file" -O "$file"
+done
+
+ncrcat ersst.v5.*.nc ersst.v5.185401-202408.nc
+
+(to remove the lev dimension)
+ncks -x -v lev,sst ersst.v5.185401-202408.nc ersst.v5.185401-202408.nc
+ncks -x -v lev,ssta ersst.v5.185401-202408.nc ersst.v5.185401-202408.nc
+
+Data Info:
+
+geospatial_lon_min :
+-1.0
+geospatial_lon_max :
+359.0
+geospatial_lat_min :
+-89.0
+geospatial_lat_max :
+89.0
+geospatial_lat_units :
+degrees_north
+geospatial_lat_resolution :
+2.0
+geospatial_lon_units :
+degrees_east
+geospatial_lon_resolution :
+2.0
+spatial_resolution :
+2.0 degree grid
+cdm_data_type :
+Grid
+processing_level :
+NOAA Level 4
+standard_name_vocabulary :
+CF Standard Name Table (v40, 25 January 2017)
+keywords :
+Earth Science > Oceans > Ocean Temperature > Sea Surface Temperature
+keywords_vocabulary :
+NASA Global Change Master Directory (GCMD) Science Keywords
+project :
+NOAA Extended Reconstructed Sea Surface Temperature (ERSST)
+platform :
+Ship and Buoy SSTs from ICOADS R3.0 and NCEP GTS
+instrument :
+Conventional thermometers
+source :
+In situ data: ICOADS R3.0 before 2015, NCEP in situ GTS from 2016 to present, and Argo SST from 1999 to present. Ice data: HadISST2 ice before 2015, and NCEP ice after 2015.
+comment :
+SSTs were observed by conventional thermometers in Buckets (in sulated or un-insulated canvas and wooded buckets), Engine Room Intakers, or floats and drifters
+references :
+Huang et al, 2017: Extended Reconstructed Sea Surface Temperatures Version 5 (ERSSTv5): Upgrades, Validations, and Intercomparisons. Journal of Climate, https://doi.org/10.1175/JCLI-D-16-0836.1
+climatology :
+Climatology is based on 1971-2000 SST, Xue, Y., T. M. Smith, and R. W. Reynolds, 2003: Interdecadal changes of 30-yr SST normals during 1871.2000. Journal of Climate, 16, 1601-1612.
+NCO :
+netCDF Operators version 5.2.4 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco, Citation = 10.1016/j.envsoft.2008.03.004)
