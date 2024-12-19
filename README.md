@@ -1,6 +1,6 @@
 # ENSO Nino3.4 Index Prediction Tools
 
-A classification and a regression tool built to predict the phase of ENSO and the value of the Nino3.4 Index, respectively. The classification tool predicts the ENSO phase at a specified lead given the Nino3.4 Index. The regression tool predicts the value of the Nino3.4 Index at a specified lead, given the Nino3.4 Index and a specified number of lagged steps. This tool was designed specifically to test the effects of various (and invalid) preprocessing steps. 
+A classification and a regression tool built to predict the phase of ENSO and the value of the Nino3.4 Index, respectively. The classification tool predicts the ENSO phase at a specified lead given the Nino3.4 Index. The regression tool predicts the value of the Nino3.4 Index at a specified lead, given the Nino3.4 Index and a specified number of lagged steps. This tool was designed specifically to test the effects of various preprocessing steps. 
 
 These tools are also used as part of a tutorial given by CSU for NC A&T. The full tutorial Github can be found at <https://github.com/eabarnes1010/ml_tutorial_ncat>. 
 
